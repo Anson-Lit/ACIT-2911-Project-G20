@@ -3,17 +3,21 @@
 
     <ul class="list-group">
         <li class="list-group-item">
-            <h3><strong><%= expenseItem.title %>: </strong></h3>
+            <h3><strong><%= expenseItem.date %>: </strong></h3>
             <h4>
-                <%= expenseItem.description %>
+                <%= expenseItem.transaction %>
             </h4>
-            <h4>Completed:
+            <h4>
+                $
+                <%= expenseItem.Cost %>
+            </h4>
+            <!-- <h4>Completed:
                 <% if (expenseItem.completed == true) { %>
                     <span class="label label-success">True</span>
                     <% } else if (expenseItem.completed == false) { %>
                         <span class="label label-danger">False</span>
                         <% } %>
-            </h4>
+            </h4> -->
 
         </li>
     </ul>

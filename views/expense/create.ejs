@@ -1,13 +1,30 @@
 <div class="container">
     <form action="/expense" method="POST">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="titleInput" placeholder="Title" name="title">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <br>
+        <%
+        let now = new Date()
+        let yyyy = now.getFullYear();
+        let mm = now.getMonth()+1;
+        let dd = now.getDate();
+        let hr = now.getHours()
+        let min = now.getMinutes()
+        
+        if (dd < 10){ dd='0'+dd } 
+        if (mm < 10){ mm='0'+mm } 
+        if (hr < 10){ hr='0'+hr }
+        if (min < 10){ min='0'+min }
+        
+        let today = yyyy+'-'+mm+'-'+dd+'T'+hr+':'+min;
+        %>
+
+            <div class="form-group">
+                <label for="datetime">Date of Transaction</label>
+                <input type="datetime-local" id="notify-date" name="datetime" min="<%= today %>">
+            </div>
+            <div class="form-group">
+                <label for="description">Transaction Description</label>
+                <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter the Transaction Description" name="transaction"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>

@@ -23,13 +23,12 @@ let expenseController = {
 
     create: (req, res) => {
         let nextId = database.testperson1.expenses[database.testperson1.expenses.length - 1].id
-        let reminder = {
+        let expense = {
             id: nextId + 1,
-            title: req.body.title,
-            description: req.body.description,
-            completed: false,
+            date: req.body.datetime,
+            transaction: req.body.transaction,
         };
-        database.testperson1.expenses.push(reminder);
+        database.testperson1.expenses.push(expense);
         res.redirect("/expenses");
     },
 
