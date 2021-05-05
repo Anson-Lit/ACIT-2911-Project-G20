@@ -4,12 +4,16 @@
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
             <li class="list-group-item">
-                <strong><%= expenseItem.date %>: </strong>
+                <strong><%= expenseItem.date %> </strong>
                 <%= expenseItem.transaction %>
-                    <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
+                    <% if ((!expenseItem.price) || (isNaN(parseFloat(expenseItem.price)) === true)) { %>
+                        No price set
+                        <% } else { %>
+                            $
+                            <%= expenseItem.price %>
+                                <% } %>
+                                    <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
             <% }) %>
     </ul>
-
-
 </div>

@@ -15,7 +15,7 @@ let expenseController = {
             return expense.id == expenseToFind;
         });
         if (searchResult != undefined) {
-            res.render("expense/single-reminder", { expenseItem: searchResult });
+            res.render("expense/single-expense", { expenseItem: searchResult });
         } else {
             res.render("expense/index", { expenses: database.testperson1.expenses });
         }
@@ -27,6 +27,7 @@ let expenseController = {
             id: nextId + 1,
             date: req.body.datetime,
             transaction: req.body.transaction,
+            price: req.body.price
         };
         database.testperson1.expenses.push(expense);
         res.redirect("/expenses");

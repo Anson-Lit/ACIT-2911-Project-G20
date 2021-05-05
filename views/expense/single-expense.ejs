@@ -8,8 +8,12 @@
                 <%= expenseItem.transaction %>
             </h4>
             <h4>
-                $
-                <%= expenseItem.Cost %>
+                <% if ((!expenseItem.price) || (isNaN(parseFloat(expenseItem.price)) === true)) { %>
+                    No price set
+                    <% } else { %>
+                        $
+                        <%= expenseItem.price %>
+                            <% } %>
             </h4>
         </li>
     </ul>
