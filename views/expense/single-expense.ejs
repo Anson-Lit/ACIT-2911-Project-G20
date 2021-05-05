@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 class="page-header">Expense</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h3><strong><%= expenseItem.date %>: </strong></h3>
+            <h4>
+                <%= expenseItem.transaction %>
+            </h4>
+            <h4>
+                <% if ((!expenseItem.price) || (isNaN(parseFloat(expenseItem.price)) === true)) { %>
+                    No price set
+                    <% } else { %>
+                        $
+                        <%= expenseItem.price %>
+                            <% } %>
+            </h4>
+        </li>
+    </ul>
+
+</div>
