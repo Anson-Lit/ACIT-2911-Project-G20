@@ -5,6 +5,18 @@
 
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #bdcebe;
+}
+
+.btn {
+  background-color: #eca1a6;
+}
+
+h1 {
+  background-color: #eca1a6;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 h1,
