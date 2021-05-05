@@ -26,6 +26,6 @@ app.post("/expense/", expenseController.create);
 
 app.listen(3003, function() {
     console.log(
-        "Server running. Visit: localhost:3003/expense "
+        "Server running. Visit: localhost:3003/expenses "
     );
 });
