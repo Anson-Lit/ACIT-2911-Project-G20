@@ -3,6 +3,7 @@
 // requiring the app
 const app = require('./index');
 const request = require('supertest');
+const { getMaxListeners } = require('./index');
 
 // beforeAll((done) => {
 //     done();
@@ -15,8 +16,12 @@ afterAll( async (done) => {
 
 
 const user1 = {
-    name: "test",
-    email: "test@email.com"
+    email: "John@gmail.com",
+    password: "j"
+}
+const user2 = {
+    email: "email@email.com",
+    password:"123"
 }
 const test1 = {
     transaction: 'TEST TRANSACTION',
@@ -24,10 +29,54 @@ const test1 = {
 }
 
 
+// ~~~ TESTING USER LOG IN FUNCTIONALITY ~~~
+
+//log in user using credentials
+it ('lets us log in', async ()=> {
+    const response = await request(app)
+        .post('/login')
+        .send(user1)
+        .set('Accept','application/json')
+        //.expect('Content-Type',/json/)
+        .expect(302)
+        expect(response.redirect).toBeTruthy()
+
+
+})
+
+
+it ('does not allow login when nonexistent user', async() =>{
+    const response = await request(app)
+        .post('/login')
+        .send(user2)
+        .set('Accept','application/json')
+        //.expect(400)
+        //console.log(response)
+        console.log(response)
+        expect(response.redirect).toBeTruthy()
+        //expect(response.)
+
+})
+
+
+
+
+
+// GETs list of expenses
+it ('returns list of expenses', async () => {
+    const response = await request(app)
+        .get('/expenses')
+        .set('Accept','application/json')
+        .expect(302)
+        expect(response.redirect).toBeTruthy()
+})
+
+
+
 
 // create a new expense
 it('Testing to create a new expense', async () => {
-    const res = await request(app)
+    const response = await request(app)
         .post('/expense/')
         .send(test1)
         .set('Accept', 'application/json')
@@ -38,7 +87,7 @@ it('Testing to create a new expense', async () => {
 
 // delete an existing expense
 it( 'Testing to delete an expense', async () => {
-    const res = await request(app)
+    const response = await request(app)
         .post('/expense/delete/0')
         .set('Accept','application/json')
         .expect(302);
@@ -48,10 +97,12 @@ it( 'Testing to delete an expense', async () => {
 
 //delete a nonexistent expense
 it ('Testing to delete an expense that doesn\'t exist', async ()=>{
-    const res = await request(app)
+    const response = await request(app)
         .post('/expense/delete/99999')
         .set('Accept','application/json')
-        .expect(404);
+        .expect(302);
 
-        
+
+
 })
+
