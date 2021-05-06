@@ -15,11 +15,11 @@ afterAll( async (done) => {
 });
 
 
-const user1 = {
+const user1 = { //actual user 
     email: "John@gmail.com",
     password: "j"
 }
-const user2 = {
+const user2 = { //not a real user
     email: "email@email.com",
     password:"123"
 }
@@ -54,13 +54,15 @@ it ('does not allow login when nonexistent user', async() =>{
         //console.log(response)
         console.log(response)
         expect(response.redirect).toBeTruthy()
-        //expect(response.)
+
 
 })
 
 
 
 
+
+// ~~~ testing expense instance functionality ~~~
 
 // GETs list of expenses
 it ('returns list of expenses', async () => {
