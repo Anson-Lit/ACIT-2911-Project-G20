@@ -14,17 +14,19 @@ afterAll( async (done) => {
 });
 
 
-const test1 = {
+const user1 = {
     name: "test",
-    email: "test@email.com",
-    transaction: "test transaction",
-    price: 40
+    email: "test@email.com"
+}
+const test1 = {
+    transaction: 'TEST TRANSACTION',
+    cost: 40
 }
 
 
 
-// successfully create a new user that doesnt already exist
-it('Testing to create a new nonexistent user', async () => {
+// successfully create a new expense
+it('Testing to create a new expense', async () => {
     const res = await request(app)
         .post('/expense/')
         .send(test1)
@@ -32,7 +34,7 @@ it('Testing to create a new nonexistent user', async () => {
         //.expect('Content-Type', /json/)
         //.expect(200);
 
-        //the database should give the user an id and date automatically
+        //the database should give the expense an id and date automatically
         expect(res.body.id).toBeDefined()
         expect(res.body.date).toBeDefined()
 });
