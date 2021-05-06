@@ -8,10 +8,10 @@ const request = require('supertest');
 //     done();
 // });
 
-// afterAll( async (done) => {
-//     app.close();
-//     done();
-// });
+afterAll( async (done) => {
+    app.close();
+    done();
+});
 
 
 const test1 = {
@@ -26,10 +26,11 @@ const test1 = {
 // successfully create a new user that doesnt already exist
 it('Testing to create a new nonexistent user', async () => {
     const res = await request(app)
-        .post('/expense/create')
+        .post('/expense/')
         .send(test1)
         .set('Accept', 'application/json')
-        .expect(200);
+        //.expect('Content-Type', /json/)
+        //.expect(200);
 
         //the database should give the user an id and date automatically
         expect(res.body.id).toBeDefined()
