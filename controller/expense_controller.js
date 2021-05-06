@@ -3,7 +3,9 @@ let database = require("../database");
 
 let expenseController = {
     list: (req, res) => {
-        res.render("expense/index", { expenses: database.testperson1.expenses });
+        // console.log(req.user.expense)
+        // console.log(database.database[0].expenses)
+        res.render("expense/index", { expenses: database.database[0].expenses });
     },
 
     new: (req, res) => {
@@ -12,31 +14,31 @@ let expenseController = {
 
     listOne: (req, res) => {
         let expenseToFind = req.params.id;
-        let searchResult = database.testperson1.expenses.find(function(expense) {
+        let searchResult = database.database[0].expenses.find(function(expense) {
             return expense.id == expenseToFind;
         });
         if (searchResult != undefined) {
             res.render("expense/single-expense", { expenseItem: searchResult });
         } else {
-            res.render("expense/index", { expenses: database.testperson1.expenses });
+            res.render("expense/index", { expenses: database.database[0].expenses });
         }
     },
 
     create: (req, res) => {
-        let nextId = database.testperson1.expenses[database.testperson1.expenses.length - 1].id
+        let nextId = database.database[0].expenses[database.database[0].expenses.length - 1].id
         let expense = {
             id: nextId + 1,
             date: req.body.datetime,
             transaction: req.body.transaction,
             price: req.body.price
         };
-        database.testperson1.expenses.push(expense);
+        database.database[0].expenses.push(expense);
         res.redirect("/expenses");
     },
 
     edit: (req, res) => {
         let reminderToFind = req.params.id;
-        let searchResult = database.testperson1.expenses.find(function(expenses) {
+        let searchResult = database.database[0].expenses.find(function(expenses) {
             return expenses.id == reminderToFind;
         });
         res.render("expense/edit", { expenseItem: searchResult });
@@ -51,11 +53,11 @@ let expenseController = {
     update: (req, res) => {
         let reminderToUpdate = req.params.id;
         let { datetime, transaction, price } = req.body;
-        for (var r in testperson1.expenses) {
-            if (testperson1.expenses[r].id.toString() === reminderToUpdate) {
-                testperson1.expenses[r].transaction = transaction;
-                testperson1.expenses[r].price = price;
-                testperson1.expenses[r].date = datetime;
+        for (var r in database.database[0].expenses) {
+            if (database.database[0].expenses[r].id.toString() === reminderToUpdate) {
+                database.database[0].expenses[r].transaction = transaction;
+                database.database[0].expenses[r].price = price;
+                database.database[0].expenses[r].date = datetime;
                 break;
             }
         }
