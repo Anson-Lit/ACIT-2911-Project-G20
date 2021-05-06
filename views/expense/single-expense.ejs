@@ -15,6 +15,7 @@
                         <%= expenseItem.price %>
                             <% } %>
             </h4>
+            <a class="btn btn-warning" href=<%="/expense/" + expenseItem.id + "/edit" %>>Edit</a>
             <form class="deleteForm " method="POST" action=<%="/expense/delete/" + expenseItem.id %>>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>

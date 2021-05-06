@@ -36,8 +36,8 @@ let expenseController = {
 
     edit: (req, res) => {
         let reminderToFind = req.params.id;
-        let searchResult = database.testperson1.expenses.find(function(reminder) {
-            return reminder.id == reminderToFind;
+        let searchResult = database.testperson1.expenses.find(function(expenses) {
+            return expenses.id == reminderToFind;
         });
         res.render("expense/edit", { expenseItem: searchResult });
     },
@@ -48,6 +48,19 @@ let expenseController = {
         res.redirect("/expenses")
     },
 
+    update: (req, res) => {
+        let reminderToUpdate = req.params.id;
+        let { datetime, transaction, price } = req.body;
+        for (var r in testperson1.expenses) {
+            if (testperson1.expenses[r].id.toString() === reminderToUpdate) {
+                testperson1.expenses[r].transaction = transaction;
+                testperson1.expenses[r].price = price;
+                testperson1.expenses[r].date = datetime;
+                break;
+            }
+        }
+        res.redirect("/expenses");
+    }
 
 };
 
