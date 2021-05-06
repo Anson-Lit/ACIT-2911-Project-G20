@@ -25,16 +25,33 @@ const test1 = {
 
 
 
-// successfully create a new expense
+// create a new expense
 it('Testing to create a new expense', async () => {
     const res = await request(app)
         .post('/expense/')
         .send(test1)
         .set('Accept', 'application/json')
-        //.expect('Content-Type', /json/)
-        //.expect(200);
+        .expect(302);
 
-        //the database should give the expense an id and date automatically
-        expect(res.body.id).toBeDefined()
-        expect(res.body.date).toBeDefined()
+
 });
+
+// delete an existing expense
+it( 'Testing to delete an expense', async () => {
+    const res = await request(app)
+        .post('/expense/delete/0')
+        .set('Accept','application/json')
+        .expect(302);
+
+
+});
+
+//delete a nonexistent expense
+it ('Testing to delete an expense that doesn\'t exist', async ()=>{
+    const res = await request(app)
+        .post('/expense/delete/99999')
+        .set('Accept','application/json')
+        .expect(404);
+
+        
+})
