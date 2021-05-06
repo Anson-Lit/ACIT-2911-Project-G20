@@ -23,6 +23,7 @@ app.get("/expense/:id/edit", expenseController.edit);
 
 app.post("/expense/", expenseController.create);
 
+app.post("/expense/delete/:id", expenseController.delete);
 
 app.listen(3003, function() {
     console.log(

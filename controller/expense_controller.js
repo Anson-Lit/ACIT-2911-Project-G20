@@ -1,3 +1,4 @@
+const { testperson1 } = require("../database");
 let database = require("../database");
 
 let expenseController = {
@@ -40,6 +41,14 @@ let expenseController = {
         });
         res.render("expense/edit", { expenseItem: searchResult });
     },
+    delete: (req, res) => {
+        let findId = req.params.id
+        let indexNum = testperson1.expenses.findIndex(i => i.id == findId)
+        testperson1.expenses.splice(indexNum, 1)
+        res.redirect("/expenses")
+    },
+
+
 };
 
 module.exports = expenseController;
