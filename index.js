@@ -28,8 +28,10 @@ app.post("/expense/delete/:id", expenseController.delete);
 app.post("/expense/update/:id", expenseController.update);
 
 
-app.listen(3003, function() {
+const server = app.listen(3003, function() {
     console.log(
         "Server running. Visit: localhost:3003/expenses "
     );
 });
+
+module.exports = server;

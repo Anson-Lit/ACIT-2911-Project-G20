@@ -4,14 +4,14 @@
 const app = require('./index');
 const request = require('supertest');
 
-beforeAll((done) => {
-    done();
-});
+// beforeAll((done) => {
+//     done();
+// });
 
-afterAll( async (done) => {
-    app.close();
-    done();
-});
+// afterAll( async (done) => {
+//     app.close();
+//     done();
+// });
 
 
 const test1 = {
@@ -23,18 +23,12 @@ const test1 = {
 
 
 
-it('Testing jest', () => {
-    expect(1).toBe(1)
-})
-
-
 // successfully create a new user that doesnt already exist
 it('Testing to create a new nonexistent user', async () => {
     const res = await request(app)
-        .post('/expense')
+        .post('/expense/create')
         .send(test1)
         .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
         .expect(200);
 
         //the database should give the user an id and date automatically
