@@ -2,10 +2,12 @@ const passport = require("../middleware/passport");
 
 let authController = {
     login: (req, res) => {
+        res.status(200);
         res.render("auth/login", { loggedIn: false });
     },
 
     register: (req, res) => {
+        res.status(200);
         res.render("auth/register", { loggedIn: false });
     },
 
@@ -17,6 +19,7 @@ let authController = {
     },
     logout: (req, res) => {
         req.logout();
+        res.status(200);
         res.redirect("/login")
     }
 };

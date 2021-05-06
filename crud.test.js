@@ -31,6 +31,24 @@ const test1 = {
 
 // ~~~ TESTING USER LOG IN FUNCTIONALITY ~~~
 
+// gets login page, should return status code 200 OK
+it ('lets us access the login form', async () => {
+    const response = await request(app)
+        .get('/login')
+        .set('Accept','application/json')
+        .expect(200)
+        expect(response.redirect).toBeFalsy()
+})
+
+// gets register page, should return status code 200 OK
+it ('lets us access the register form', async () => {
+    const response = await request(app)
+        .get('/register')
+        .expect(200)
+        expect(response.redirect).toBeFalsy()
+})
+
+
 //log in user using credentials
 it ('lets us log in', async ()=> {
     const response = await request(app)
@@ -52,7 +70,7 @@ it ('does not allow login when nonexistent user', async() =>{
         .set('Accept','application/json')
         //.expect(400)
         //console.log(response)
-        console.log(response)
+        //console.log(response)
         expect(response.redirect).toBeTruthy()
 
 
