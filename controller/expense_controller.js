@@ -10,6 +10,7 @@ let expenseController = {
     },
 
     new: (req, res) => {
+        res.status(200)
         res.render("expense/create");
     },
 
