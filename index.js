@@ -55,8 +55,10 @@ app.get("/login", forwardAuthenticated, authController.login);
 app.post("/login", authController.loginSubmit);
 app.get("/logout", authController.logout)
 
-app.listen(3003, function() {
+const server = app.listen(3003, function() {
     console.log(
         "Server running. Visit: localhost:3003/expenses "
     );
 });
+
+module.exports = server;
