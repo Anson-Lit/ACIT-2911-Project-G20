@@ -69,7 +69,6 @@ it ('lets us log in', async ()=> {
         .send(user1)
         .set('Accept','application/json')
         //.expect('Content-Type',/json/)
-        .expect(302)
         //console.log(response)
         expect(response.redirect).toBeTruthy()
 
@@ -100,9 +99,10 @@ it ('returns list of expenses', async () => {
     const response = await request(app)
         .get('/expenses')
         .set('Accept','application/json')
-        .expect(302)
         expect(response.redirect).toBeTruthy()
 })
+
+
 
 it ('get the new expense page', async() => {
     const response = await request(app)
@@ -118,7 +118,6 @@ it('Testing to create a new expense', async () => {
         .post('/expense/')
         .send(test1)
         .set('Accept', 'application/json')
-        .expect(302);
 
 
 });
@@ -128,7 +127,6 @@ it( 'Testing to delete an expense', async () => {
     const response = await request(app)
         .post('/expense/delete/0')
         .set('Accept','application/json')
-        .expect(404);
 
 
 });
@@ -138,7 +136,6 @@ it ('Testing to delete an expense that doesn\'t exist', async ()=>{
     const response = await request(app)
         .post('/expense/delete/99999')
         .set('Accept','application/json')
-        
 
 
 

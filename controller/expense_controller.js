@@ -5,12 +5,10 @@ let expenseController = {
     list: (req, res) => {
         // console.log(req.user.expense)
         // console.log(database.database[0].expenses)
-        res.status(200)
-        res.render("expense/index", { expenses: database.database[0].expenses });
+        res.render( "expense/index", { expenses: database.database[0].expenses });
     },
 
     new: (req, res) => {
-        res.status(200)
         res.render("expense/create");
     },
 
