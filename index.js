@@ -23,9 +23,15 @@ app.get("/expense/:id/edit", expenseController.edit);
 
 app.post("/expense/", expenseController.create);
 
+app.post("/expense/delete/:id", expenseController.delete);
 
-app.listen(3003, function() {
+app.post("/expense/update/:id", expenseController.update);
+
+
+const server = app.listen(3003, function() {
     console.log(
         "Server running. Visit: localhost:3003/expenses "
     );
 });
+
+module.exports = server;
