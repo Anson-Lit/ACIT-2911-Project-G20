@@ -25,14 +25,10 @@ let expenseController = {
     },
 
     create: (req, res) => {
-        let id_list = []
-        const set = new Set(id_list);
-        let id = 1;
-        while (set.has(id)) {
-            id++
-        }
+
+        let nextId = database.database[0].expenses[database.database[0].expenses.length - 1].id
         let expense = {
-            id: id,
+            id: nextId + 1,
             date: req.body.datetime,
             transaction: req.body.transaction,
             cost: req.body.cost
@@ -57,11 +53,11 @@ let expenseController = {
 
     update: (req, res) => {
         let reminderToUpdate = req.params.id;
-        let { datetime, transaction, price } = req.body;
+        let { datetime, transaction, cost } = req.body;
         for (var r in database.database[0].expenses) {
             if (database.database[0].expenses[r].id.toString() === reminderToUpdate) {
                 database.database[0].expenses[r].transaction = transaction;
-                database.database[0].expenses[r].price = price;
+                database.database[0].expenses[r].cost = cost;
                 database.database[0].expenses[r].date = datetime;
                 break;
             }
