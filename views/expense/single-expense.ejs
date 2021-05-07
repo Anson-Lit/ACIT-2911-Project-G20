@@ -8,11 +8,11 @@
                 <%= expenseItem.transaction %>
             </h4>
             <h4>
-                <% if ((!expenseItem.price) || (isNaN(parseFloat(expenseItem.price)) === true)) { %>
+                <% if ((!expenseItem.cost) && (!isNaN(parseFloat(expenseItem.cost)))) { %>
                     No price set
                     <% } else { %>
                         $
-                        <%= expenseItem.price %>
+                        <%= expenseItem.cost %>
                             <% } %>
             </h4>
             <a class="btn btn-warning" href=<%="/expense/" + expenseItem.id + "/edit" %>>Edit</a>
