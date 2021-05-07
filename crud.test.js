@@ -5,6 +5,8 @@ const app = require('./index');
 const request = require('supertest');
 const { getMaxListeners } = require('./index');
 
+const db = require('./database');
+
 //mocking the model
 
 // beforeAll((done) => {
@@ -18,8 +20,8 @@ afterAll( async (done) => {
 
 
 const user1 = { //actual user 
-    email: "John@gmail.com",
-    password: "j"
+    email: db.database[0].email,
+    password: db.database[0].password,
 }
 const user2 = { //not a real user
     email: "email@email.com",
@@ -30,8 +32,32 @@ const test1 = {
     cost: 40
 }
 
+// ~~~ TESTING the database ~~~
+it('returns the user in the database when given a valid email', () =>{
+    let user = db.userModel.findOne(user1.email)
+    expect(user.name).toEqual('John Doe')
+})
 
-// ~~~ TESTING auth_controller ~~~
+it('throws an error if you try to find a nonexistent email', () => {
+    expect( () => {
+        let user = db.userModel.findOne(user2.email)
+    }).toThrowError()
+})
+
+
+it('returns the user in the database when given the id', () => {
+    let user = db.userModel.findById(1)
+    expect(user.name).toEqual('John Doe')
+})
+
+it('throws an error if you try to use a nonexistent id', () =>{
+    expect(()=>{
+        let user = db.userModel.findById(2)
+    }).toThrowError() 
+})
+
+
+// ~~~ TESTING index ROUTES ~~~
 
 // gets login page, should return status code 200 OK
 it ('lets us access the login form', async () => {
@@ -70,13 +96,13 @@ it ('prevents us from accessing expenses', async () => {
 
 
 //log in user using credentials
-it ('lets us log in', async ()=> {
+it ('should redirect to /expenses on successful login', async ()=> {
     const response = await request(app)
         .post('/login')
-        .send(user1)
+        .field('email',user1.email)
+        .field('password',user1.password)
         .expect('Content-Type','text/plain; charset=utf-8')
-        //.expect('Content-Type',/json/)
-        //console.log(response)
+        .expect('Location','/expenses')
         expect(response.redirect).toBeTruthy()
 
 
@@ -84,14 +110,12 @@ it ('lets us log in', async ()=> {
 
 // REJECTS user with no credentials, redirects after a failed login 
 
-it ('does not allow login when nonexistent user', async() =>{
+it ('should redirect to login page again, when nonexistent user', async() =>{
     const response = await request(app)
         .post('/login')
         .send(user2)
         .expect('Content-Type','text/plain; charset=utf-8')
-        //.expect(400)
-        //console.log(response.body)
-        //expect(response.redirect).toHaveBeenCalled()
+        .expect('Location','/login')
         expect(response.redirect).toBeTruthy()
 
 
