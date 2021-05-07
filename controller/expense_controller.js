@@ -25,12 +25,17 @@ let expenseController = {
     },
 
     create: (req, res) => {
-        let nextId = database.database[0].expenses[database.database[0].expenses.length - 1].id
+        let id_list = []
+        const set = new Set(id_list);
+        let id = 1;
+        while (set.has(id)) {
+            id++
+        }
         let expense = {
-            id: nextId + 1,
+            id: id,
             date: req.body.datetime,
             transaction: req.body.transaction,
-            price: req.body.price
+            cost: req.body.cost
         };
         database.database[0].expenses.push(expense);
         res.redirect("/expenses");
