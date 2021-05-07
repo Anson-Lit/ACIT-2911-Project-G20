@@ -3,11 +3,8 @@
 // requiring the app
 const app = require('./index');
 const request = require('supertest');
-const { getMaxListeners } = require('./index');
-
 const db = require('./database');
 
-//mocking the model
 
 // beforeAll((done) => {
 //     done();
@@ -38,6 +35,7 @@ it('returns the user in the database when given a valid email', () =>{
     expect(user.name).toEqual('John Doe')
 })
 
+
 it('throws an error if you try to find a nonexistent email', () => {
     expect( () => {
         let user = db.userModel.findOne(user2.email)
@@ -50,6 +48,7 @@ it('returns the user in the database when given the id', () => {
     expect(user.name).toEqual('John Doe')
 })
 
+
 it('throws an error if you try to use a nonexistent id', () =>{
     expect(()=>{
         let user = db.userModel.findById(2)
@@ -58,19 +57,14 @@ it('throws an error if you try to use a nonexistent id', () =>{
 
 
 // ~~~ TESTING index ROUTES ~~~
-
 // gets login page, should return status code 200 OK
 it ('lets us access the login form', async () => {
     const response = await request(app)
         .get('/login')
         .expect('Content-Type','text/html; charset=utf-8')
-        // .end((err,res)=> {
-        //     expect(res).to.have.status(200);
-        //     expect(res).to.have.header('content-type','text/html; charset=utf-8');
-        //     expect(res.text).to.contain('Express');
-        // })
         expect(response.redirect).toBeFalsy()
 })
+
 
 // NOT YET IMPLEMENTED
 // gets register page, should return status code 200 OK
@@ -87,8 +81,8 @@ it ('prevents us from accessing expenses', async () => {
     const response = await request(app)
         .get('/expenses')
         .expect('Content-Type','text/plain; charset=utf-8')
-        //console.log(response)
-        //should redirect to login page
+        //should redirect
+        .expect('Location','/login')
         expect(response.redirect).toBeTruthy()
         expect(response.text).toContain('Redirecting')
 })
@@ -99,10 +93,9 @@ it ('prevents us from accessing expenses', async () => {
 it ('should redirect to /expenses on successful login', async ()=> {
     const response = await request(app)
         .post('/login')
-        .field('email',user1.email)
-        .field('password',user1.password)
+        .send(user1)
         .expect('Content-Type','text/plain; charset=utf-8')
-        .expect('Location','/expenses')
+        //.expect('Location','/expenses')
         expect(response.redirect).toBeTruthy()
 
 
@@ -123,13 +116,10 @@ it ('should redirect to login page again, when nonexistent user', async() =>{
 
 
 
-
-
-
 // ~~~ testing expense instance functionality ~~~
 
 // GETs list of expenses
-it ('returns list of expenses', async () => {
+it ('displays list of expenses', async () => {
     const response = await request(app)
         .get('/expenses')
         .set('Accept','application/json')
@@ -140,7 +130,6 @@ it ('returns list of expenses', async () => {
 it ('get the new expense page', async() => {
     const response = await request(app)
         .get('/expenses/new')
-
 
 })
 
@@ -161,7 +150,6 @@ it( 'Testing to delete an expense', async () => {
         .post('/expense/delete/0')
         .set('Accept','application/json')
 
-
 });
 
 //delete a nonexistent expense
@@ -169,7 +157,6 @@ it ('Testing to delete an expense that doesn\'t exist', async ()=>{
     const response = await request(app)
         .post('/expense/delete/99999')
         .set('Accept','application/json')
-
 
 
 })
