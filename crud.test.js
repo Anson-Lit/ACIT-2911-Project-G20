@@ -5,6 +5,8 @@ const app = require('./index');
 const request = require('supertest');
 const { getMaxListeners } = require('./index');
 
+//mocking the model
+
 // beforeAll((done) => {
 //     done();
 // });
@@ -29,14 +31,18 @@ const test1 = {
 }
 
 
-// ~~~ TESTING ROUTES ~~~
+// ~~~ TESTING auth_controller ~~~
 
 // gets login page, should return status code 200 OK
 it ('lets us access the login form', async () => {
     const response = await request(app)
         .get('/login')
-        .set('Accept','application/json')
-        .expect(200)
+        .expect('Content-Type','text/html; charset=utf-8')
+        // .end((err,res)=> {
+        //     expect(res).to.have.status(200);
+        //     expect(res).to.have.header('content-type','text/html; charset=utf-8');
+        //     expect(res.text).to.contain('Express');
+        // })
         expect(response.redirect).toBeFalsy()
 })
 
@@ -45,7 +51,7 @@ it ('lets us access the login form', async () => {
 it ('lets us access the register form', async () => {
     const response = await request(app)
         .get('/register')
-        .expect(200)
+        .expect(500)
         expect(response.redirect).toBeFalsy()
 })
 
@@ -54,6 +60,7 @@ it ('lets us access the register form', async () => {
 it ('prevents us from accessing expenses', async () => {
     const response = await request(app)
         .get('/expenses')
+        .expect('Content-Type','text/plain; charset=utf-8')
         //console.log(response)
         //should redirect to login page
         expect(response.redirect).toBeTruthy()
@@ -67,7 +74,7 @@ it ('lets us log in', async ()=> {
     const response = await request(app)
         .post('/login')
         .send(user1)
-        .set('Accept','application/json')
+        .expect('Content-Type','text/plain; charset=utf-8')
         //.expect('Content-Type',/json/)
         //console.log(response)
         expect(response.redirect).toBeTruthy()
@@ -75,18 +82,21 @@ it ('lets us log in', async ()=> {
 
 })
 
-// redirects after a failed login 
+// REJECTS user with no credentials, redirects after a failed login 
+
 it ('does not allow login when nonexistent user', async() =>{
     const response = await request(app)
         .post('/login')
         .send(user2)
-        .set('Accept','application/json')
+        .expect('Content-Type','text/plain; charset=utf-8')
         //.expect(400)
-        //console.log(response)
+        //console.log(response.body)
+        //expect(response.redirect).toHaveBeenCalled()
         expect(response.redirect).toBeTruthy()
 
 
 })
+
 
 
 
@@ -101,7 +111,6 @@ it ('returns list of expenses', async () => {
         .set('Accept','application/json')
         expect(response.redirect).toBeTruthy()
 })
-
 
 
 it ('get the new expense page', async() => {
