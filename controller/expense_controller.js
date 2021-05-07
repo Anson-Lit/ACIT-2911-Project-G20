@@ -5,7 +5,7 @@ let expenseController = {
     list: (req, res) => {
         // console.log(req.user.expense)
         // console.log(database.database[0].expenses)
-        res.render( "expense/index", { expenses: database.database[0].expenses });
+        res.render("expense/index", { expenses: database.database[0].expenses });
     },
 
     new: (req, res) => {
@@ -45,8 +45,8 @@ let expenseController = {
     },
     delete: (req, res) => {
         let findId = req.params.id
-        let indexNum = testperson1.expenses.findIndex(i => i.id == findId)
-        testperson1.expenses.splice(indexNum, 1)
+        let indexNum = database.database[0].expenses.findIndex(i => i.id == findId)
+        database.database[0].expenses.splice(indexNum, 1)
         res.redirect("/expenses")
     },
 
