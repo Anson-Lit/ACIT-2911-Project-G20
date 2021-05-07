@@ -1,5 +1,5 @@
 let database = [{
-    expenses: [{ id: 1, date: "2021-05-03", transaction: "Bought an apple", Cost: 5 }],
+    expenses: [{ id: 1, date: "2021-05-03", transaction: "Bought an apple", cost: 5 }],
     id: 1,
     name: "John Doe",
     email: "John@gmail.com",
