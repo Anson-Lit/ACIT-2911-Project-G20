@@ -6,19 +6,14 @@
             <li class="list-group-item">
                 <strong><%= expenseItem.date %> </strong>
                 <%= expenseItem.transaction %>
-                    <% console.log(expenseItem.cost) %>
-                        <% console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHH") %>
-                            <% console.log(!expenseItem.cost) %>
-                                <% console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!") %>
-                                    <% console.log(!isNaN(parseFloat(expenseItem.cost))) %>
-                                        <% if ((!expenseItem.cost) || (!isNaN(parseFloat(expenseItem.cost)))) { %>
-                                            $
-                                            <%= expenseItem.cost %>
-                                                <% } else { %>
-                                                    No price set
+                    <% if ((!expenseItem.cost) || (!isNaN(parseFloat(expenseItem.cost)))) { %>
+                        $
+                        <%= expenseItem.cost %>
+                            <% } else { %>
+                                No price set
 
-                                                    <% } %>
-                                                        <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
+                                <% } %>
+                                    <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
             <% }) %>
     </ul>
