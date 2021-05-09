@@ -6,11 +6,12 @@
             <li class="list-group-item">
                 <strong><%= expenseItem.date %> </strong>
                 <%= expenseItem.transaction %>
-                    <% if ((!expenseItem.price) || (isNaN(parseFloat(expenseItem.price)) === true)) { %>
-                        No price set
-                        <% } else { %>
-                            $
-                            <%= expenseItem.price %>
+                    <% if ((!expenseItem.cost) || (!isNaN(parseFloat(expenseItem.cost)))) { %>
+                        $
+                        <%= expenseItem.cost %>
+                            <% } else { %>
+                                No price set
+
                                 <% } %>
                                     <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
