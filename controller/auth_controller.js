@@ -1,4 +1,5 @@
 const passport = require("../middleware/passport");
+let database = require("../database");
 
 let authController = {
     login: (req, res) => {
@@ -16,6 +17,18 @@ let authController = {
             successRedirect: "/expenses",
             failureRedirect: "/login",
         })(req, res, next);
+    },
+    registerSubmit: (req, res) => {
+        let idNum = database.database.length + 1
+        console.log(idNum)
+        let user = {
+            expenses: [],
+            id: idNum,
+            email: req.body.email,
+            password: req.body.password
+        }
+        database.database.push(user)
+        res.render("auth/login")
     },
     logout: (req, res) => {
         req.logout();
