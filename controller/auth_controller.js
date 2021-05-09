@@ -20,7 +20,6 @@ let authController = {
     },
     registerSubmit: (req, res) => {
         let idNum = database.database.length + 1
-        console.log(idNum)
         let user = {
             expenses: [],
             id: idNum,
