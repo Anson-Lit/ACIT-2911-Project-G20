@@ -30,20 +30,42 @@ button {
   width: 100%;
 }
 
-/* Center landing page buttons */
+/* Center landing page buttons and logo */
 .land {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
 
 .logo {
   display: block;
   margin: auto;
   width: 50%;
+  border-radius: 15px;
 }
 
 #login_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+#signup_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+/* .land {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+} */
+
+/* #login_btn {
   grid-column: 2/3;
   grid-row: 2/3;
 }
@@ -51,6 +73,63 @@ button {
 #signup_btn {
   grid-column: 2/3;
   grid-row: 4/5;
+} */
+
+/* Landing page button transitions */
+.land button {
+  width: 150px;
+  height: 50px;
+  border: 1px solid #333;
+  font-size: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  transition: 1s;
+}
+
+.land button::before, .land button::after {
+  position: absolute;
+  background: #eca1a6;
+  z-index: -1;
+  transition: 1s;
+  content: '';
+}
+
+.land button::before {
+  height: 50px;
+  width: 130px;
+}
+
+.land button::after {
+  width: 150px;
+  height: 30px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.land button:hover::before {
+  width: 0px;
+  background: #fff;
+}
+
+.land button:hover::after {
+  height: 0px;
+  background: #fff;
+}
+
+.land button:hover {
+  background: #fff;
 }
 
 /* Add a hover effect for buttons */
