@@ -6,21 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="land_style.css" />
-    <script defer src="app.js"></script>
+    <script defer src="script.js"></script>
   </head>
 
   <body>
-    <!-- Button to open the modal login form -->
-    <button
-      class="land"
-      onclick="document.getElementById('id01').style.display='block'"
-      type="button"
-    >
-      Login
-    </button>
+    <!-- Expense Tracker Logo -->
+    <div>
+      <img src="image/ET.png" alt="Logo" class="logo">
+    </div>
 
-    <!-- Button to sign up -->
-    <button class="land" type="button">Register</button>
+    <div class="land">
+    <!-- Button to open the modal login form -->
+      <button
+      id="login_btn"
+        onclick="document.getElementById('id01').style.display='block'"
+        type="button"
+      >
+        Login
+      </button>
+
+      <!-- Button to sign up -->
+      <button id="signup_btn" type="button">Register</button>
+    </div>
 
     <!-- The Modal -->
     <div id="id01" class="modal">
@@ -39,12 +46,7 @@
 
         <div class="container">
           <label for="uname"><b>Email address</b></label>
-          <input
-            type="text"
-            placeholder="Enter email"
-            name="uname"
-            required
-          />
+          <input type="text" placeholder="Enter email" name="uname" required />
 
           <label for="psw"><b>Password</b></label>
           <input

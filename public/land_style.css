@@ -31,7 +31,27 @@ button {
 }
 
 /* Center landing page buttons */
+.land {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
 
+.logo {
+  display: block;
+  margin: auto;
+  width: 50%;
+}
+
+#login_btn {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+#signup_btn {
+  grid-column: 2/3;
+  grid-row: 4/5;
+}
 
 /* Add a hover effect for buttons */
 button:hover {
