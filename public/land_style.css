@@ -30,6 +30,9 @@ button {
   width: 100%;
 }
 
+/* Center landing page buttons */
+
+
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
