@@ -120,16 +120,16 @@ button {
 
 .land button:hover::before {
   width: 0px;
-  background: #fff;
+  background: #d6cbd3;
 }
 
 .land button:hover::after {
   height: 0px;
-  background: #fff;
+  background: #d6cbd3;
 }
 
 .land button:hover {
-  background: #fff;
+  background: #d6cbd3;
 }
 
 /* Add a hover effect for buttons */
