@@ -14,11 +14,11 @@
     if (hr < 10){ hr='0'+hr }
     if (min < 10){ min='0'+min }
     
-    let today = yyyy+'-'+mm+'-'+dd+'T'+hr+':'+min;
+    let today = yyyy+'-'+mm+'-'+dd +hr+':'+min;
     %>
             <div class="form-group">
                 <label for="datetime">Date of Transaction</label>
-                <input type="datetime-local" id="notify-date" name="datetime" value="<%= expenseItem.date %>" min="<%= today %>">
+                <input type="date" id="notify-date" name="datetime" value="<%= expenseItem.date %>" min="<%= today %>">
             </div>
             <div class="form-group">
                 <label for="description">Transaction Description</label>
