@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 let authController = {
     login: (req, res) => {
         res.status(200);
-        res.render("auth/login", { loggedIn: false });
+        res.render("/", { loggedIn: false });
     },
 
     register: (req, res) => {
