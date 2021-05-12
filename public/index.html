@@ -1,66 +1,59 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="land_style.css" />
     <script defer src="script.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Expense Tracker Logo -->
     <div class="logo_container">
-      <img src="image/ET.png" alt="Logo" class="logo" />
+        <img src="image/ET.png" alt="Logo" class="logo" />
     </div>
 
     <div class="land">
-      <!-- Button to open the modal login form -->
-      <button
-        id="login_btn"
-        onclick="document.getElementById('id01').style.display='block'"
-        type="button"
-      >
+        <!-- Button to open the modal login form -->
+        <button id="login_btn" onclick="document.getElementById('id01').style.display='block'" type="button">
         Login
       </button>
 
-      <!-- Button to sign up -->
-      <button id="signup_btn" type="button">Register</button>
+        <!-- Button to sign up -->
+        <a href="http://localhost:3003/register"><button id="signup_btn" type="button">Register</button></a>
     </div>
 
     <!-- The Modal -->
     <div id="id01" class="modal">
-      <span
-        onclick="document.getElementById('id01').style.display='none'"
-        class="close"
-        title="Close Modal"
-        >&times;</span
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span
       >
 
       <!-- Modal Content -->
-      <form class="modal-content animate" action="/action_page.php">
+      <form class="modal-content animate" action="/login" method="POST">
         <div class="imgcontainer">
           <img src="image/login_avatar.png" alt="Avatar" class="avatar" />
         </div>
 
         <div class="container">
           <label for="uname"><b>Email address</b></label>
-          <input type="text" placeholder="Enter email" name="uname" required />
+          <input type="text" placeholder="Enter email" name="email" required />
 
           <label for="psw"><b>Password</b></label>
           <input
             type="password"
             placeholder="Enter Password"
-            name="psw"
+            name="password"
             required
           />
 
           <button type="submit">Login</button>
-          <label>
+          <!-- <label>
             <input type="checkbox" checked="checked" name="remember" /> Remember
             me
-          </label>
+          </label> -->
         </div>
 
         <div class="container">
@@ -71,9 +64,10 @@
           >
             Cancel
           </button>
-          <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-      </form>
+          <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
     </div>
-  </body>
+    </form>
+    </div>
+</body>
+
 </html>
