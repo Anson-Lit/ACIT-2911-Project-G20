@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const session = require("express-session");
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 app.use(express.static(path.join(__dirname, "public")));
 
 const expenseController = require("./controller/expense_controller");
@@ -52,6 +54,7 @@ app.post("/expense/update/:id", ensureAuthenticated, expenseController.update);
 
 app.get("/register", forwardAuthenticated, authController.register);
 app.get("/login", forwardAuthenticated, authController.login);
+app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
 app.get("/logout", authController.logout)
 

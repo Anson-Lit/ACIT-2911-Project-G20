@@ -1,10 +1,9 @@
 .deleteForm {
-  display: inline-block
+  display: inline-block;
 }
 
-
 body {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #bdcebe;
 }
 
@@ -25,14 +24,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
 
 header.masthead {
   position: relative;
   background-color: #fff;
-  background: url("https://image.freepik.com/free-vector/reading-list-concept-illustration_114360-1005.jpg") no-repeat right center;
+  background: url("https://image.freepik.com/free-vector/reading-list-concept-illustration_114360-1005.jpg")
+    no-repeat right center;
   -webkit-background-size: contain;
   -moz-background-size: contain;
   -o-background-size: contain;
@@ -142,7 +142,7 @@ footer.footer {
   padding-bottom: 4rem;
 }
 
-.form-signin .checkbox{
+.form-signin .checkbox {
   margin-bottom: 10px;
   margin-top: 10px;
 }
