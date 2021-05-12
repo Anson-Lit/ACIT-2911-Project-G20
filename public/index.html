@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="land_style.css" />
     <script defer src="script.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Expense Tracker Logo -->
     <div class="logo_container">
-        <img src="image/ET.png" alt="Logo" class="logo" />
+      <img src="image/ET.png" alt="Logo" class="logo" />
     </div>
 
     <div class="land">
-        <!-- Button to open the modal login form -->
-        <button id="login_btn" onclick="document.getElementById('id01').style.display='block'" type="button">
+      <!-- Button to open the modal login form -->
+      <button
+        id="login_btn"
+        onclick="document.getElementById('id01').style.display='block'"
+        type="button"
+      >
         Login
       </button>
 
-        <!-- Button to sign up -->
-        <a href="http://localhost:3003/register"><button id="signup_btn" type="button">Register</button></a>
+      <!-- Button to sign up -->
+      <a href="http://localhost:3003/register" style="text-decoration: none"
+        ><button id="signup_btn" type="button">Register</button></a
+      >
     </div>
 
     <!-- The Modal -->
     <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span
+      <span
+        onclick="document.getElementById('id01').style.display='none'"
+        class="close"
+        title="Close Modal"
+        >&times;</span
       >
 
       <!-- Modal Content -->
@@ -65,9 +74,8 @@
             Cancel
           </button>
           <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+        </div>
+      </form>
     </div>
-    </form>
-    </div>
-</body>
-
+  </body>
 </html>
