@@ -3,7 +3,6 @@ const prisma = require('.prisma/client');
 const app = require('./index');
 const request = require("supertest");
 const { idText } = require('typescript');
-const expenseController = require('./controller/expense_controller');
 
 const user1 = {
     id : '12065a5e-8910-48eb-acd9-4e52ba380b31',
@@ -15,15 +14,21 @@ const user2 = {
     password: '2',
 }
 
-it('returns a user with valid credentials',() => {
+afterAll(async (done) => {
+    // await prisma.user.deleteMany();
+    // await prisma.$disconnect();
+    app.close();
+    done();
+})
+
+it('returns a user with valid credentials', () => {
     let test_user = user_controller.getUserByEmailIdAndPassword(user1.email,user1.password)
-    expect(test_user.email).toBe(user1.email)
-    expect(test_user.password).toBe(user1.password)
+    expect(test_user).toBeDefined()
 })
 
 it('returns null if theres no user found', () =>{
     let test_user = user_controller.getUserByEmailIdAndPassword(user2.email,user2.password)
-    expect(test_user).toBe(null)
+    expect(test_user).toStrictEqual(Promise.resolve())
 })
 
 it('returns a user with valid id', () => {
@@ -33,6 +38,6 @@ it('returns a user with valid id', () => {
 
 it('returns null when given an invalid id', () => {
     let test_user = user_controller.getUserById('6')
-    expect(test_user).toBe(null)
+    expect(test_user).toStrictEqual(Promise.resolve())
 })
 
