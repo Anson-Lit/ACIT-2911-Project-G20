@@ -10,7 +10,7 @@ let expenseController = {
             let expenses = await prisma.expenses.findMany({
                 where: { userId: userId }
             })
-            res.render("expense/index", { expenses: expenses });
+            res.status(200).render("expense/index", { expenses: expenses });
         } catch (err) {
             console.log(err)
             return res.status(400).json(err)
