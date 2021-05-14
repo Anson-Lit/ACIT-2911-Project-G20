@@ -28,6 +28,18 @@ h6 {
     font-weight: 700;
 }
 
+.chip {
+    display: inline-block;
+    padding: 0 15px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 25px;
+    background-color: lightblue;
+    border-style: hidden;
+    outline: none;
+}
+
 
 /* 
 header.masthead {
