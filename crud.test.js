@@ -9,7 +9,7 @@ beforeAll((done) => {
     done();
 });
 
-afterAll( async (done) => {
+afterAll(async(done) => {
     app.close();
     done();
 });
@@ -18,7 +18,7 @@ afterAll( async (done) => {
 
 const user2 = { //not a real user
     email: "email@email.com",
-    password:"123"
+    password: "123"
 }
 const test1 = {
     transaction: 'TEST TRANSACTION',
@@ -28,60 +28,60 @@ const test1 = {
 
 // ~~~ TESTING index ROUTES ~~~
 // gets login page, should return status code 200 OK
-it ('lets us access the login form', async () => {
+it('lets us access the login form', async() => {
     const response = await request(app)
         .get('/login')
-        .expect('Content-Type','text/html; charset=utf-8')
-        expect(response.redirect).toBeFalsy()
+        .expect('Content-Type', 'text/html; charset=utf-8')
+    expect(response.redirect).toBeFalsy()
 })
 
 
 // NOT YET IMPLEMENTED
 // gets register page, should return status code 200 OK
-it ('lets us access the register form', async () => {
+it('lets us access the register form', async() => {
     const response = await request(app)
         .get('/register')
         .expect(200)
-        expect(response.redirect).toBeFalsy()
+    expect(response.redirect).toBeFalsy()
 })
 
 
 // does not allow access to /expenses until logged in 
-it ('prevents us from accessing expenses', async () => {
+it('prevents us from accessing expenses', async() => {
     const response = await request(app)
         .get('/expenses')
-        .expect('Content-Type','text/plain; charset=utf-8')
+        .expect('Content-Type', 'text/plain; charset=utf-8')
         //should redirect
-        .expect('Location','/login')
-        expect(response.redirect).toBeTruthy()
-        expect(response.text).toContain('Redirecting')
+        .expect('Location', '/')
+    expect(response.redirect).toBeTruthy()
+    expect(response.text).toContain('Redirecting')
 })
 
 
 // REJECTS user with no credentials, redirects after a failed login 
 
-it ('should redirect to login page again, when nonexistent user', async() =>{
+it('should redirect to login page again, when nonexistent user', async() => {
     const response = await request(app)
         .post('/login')
         .send(user2)
-        .expect('Content-Type','text/plain; charset=utf-8')
-        .expect('Location','/login')
-        expect(response.redirect).toBeTruthy()
+        .expect('Content-Type', 'text/plain; charset=utf-8')
+        .expect('Location', '/login')
+    expect(response.redirect).toBeTruthy()
 
 
 })
 
 // ~~~ testing expense instance functionality ~~~
 // GETs list of expenses
-it ('displays list of expenses', async () => {
+it('displays list of expenses', async() => {
     const response = await request(app)
         .get('/expenses')
-        .set('Accept','application/json')
-        expect(response.redirect).toBeTruthy()
+        .set('Accept', 'application/json')
+    expect(response.redirect).toBeTruthy()
 })
 
 
-it ('get the new expense page', async() => {
+it('get the new expense page', async() => {
     const response = await request(app)
         .get('/expenses/new')
 
@@ -89,7 +89,7 @@ it ('get the new expense page', async() => {
 
 
 // create a new expense
-it('Testing to create a new expense', async () => {
+it('Testing to create a new expense', async() => {
     const response = await request(app)
         .post('/expense/')
         .send(test1)
@@ -99,10 +99,10 @@ it('Testing to create a new expense', async () => {
 });
 
 // delete an existing expense
-it( 'Testing to delete an expense', async () => {
+it('Testing to delete an expense', async() => {
     const response = await request(app)
         .post('/expense/delete/0')
-        .set('Accept','application/json')
+        .set('Accept', 'application/json')
 
 });
 
@@ -114,4 +114,3 @@ it( 'Testing to delete an expense', async () => {
 
 
 // })
-

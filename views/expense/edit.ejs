@@ -28,18 +28,22 @@
                 <label for="cost">Cost of Expense</label>
                 <input type="text" name="cost" value="<%= expenseItem.cost %>">
             </div>
+            <div class="form-group">
+                <label>Tags :</label>
+                <input id="addTags" type="text" data-role="tagsinput" name="tags" class="form-control" value="<%= expenseItem.tags %>">
+            </div>
 
             <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
 
 <script>
-    formValidation = (req, res) => {
-        // var x = document.forms["myForm"]["fname"].value;
+    formValidation = () => {
         let x = document.forms["myForm"]["cost"].value;
         if (isNaN(x) || x == "") {
             alert("The Cost of expense must be a number")
             return false;
         }
     }
+    $('#addTags').tagsinput('add');
 </script>

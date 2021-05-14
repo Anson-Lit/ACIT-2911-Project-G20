@@ -1,6 +1,6 @@
 <div class="container">
     <h1 class="page-header">Expenses</h1>
-
+    <input class="form-control  my-2" id="filter" type="text" placeholder="Filter Expenses" />
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
             <li class="list-group-item">
@@ -11,10 +11,31 @@
                         <%= expenseItem.cost %>
                             <% } else { %>
                                 No price set
-
                                 <% } %>
-                                    <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
+                                    || <strong>Tags: </strong>
+                                    <% for (let tags of expenseItem.tags.split(",")) { %>
+                                        <div class="chip">
+                                            <%= tags %>
+                                        </div>
+
+                                        <% } %>
+                                            <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
             <% }) %>
     </ul>
 </div>
+
+<script>
+    let filterexpenses = () => {
+        let checker = document.querySelectorAll(".chip")
+        for (items of checker) {
+            if (!items.innerHTML.toLowerCase().includes(myfilter.value.toLowerCase())) {
+                items.parentElement.style.display = "none";
+            } else {
+                items.parentElement.style.display = "initial"
+            }
+        }
+    }
+    let myfilter = document.getElementById("filter")
+    myfilter.addEventListener("input", filterexpenses)
+</script>
