@@ -1,5 +1,6 @@
 <div class="container">
-    <form action="/expense" method="POST">
+    <h1 class="page-header">Create</h1>
+    <form name="myForm" onsubmit="return formValidation()" action="/expense" method="POST">
         <br>
         <%
         let now = new Date()
@@ -14,21 +15,35 @@
         if (hr < 10){ hr='0'+hr }
         if (min < 10){ min='0'+min }
         
-        let today = yyyy+'-'+mm+'-'+dd+'T'+hr+':'+min;
+        let today = yyyy+'-'+mm+'-'+dd+hr+':'+min;
         %>
 
             <div class="form-group">
                 <label for="datetime">Date of Transaction</label>
-                <input type="datetime-local" id="notify-date" name="datetime" min="<%= today %>">
+                <input type="date" id="notify-date" name="datetime" min="<%= today %>">
             </div>
             <div class="form-group">
                 <label for="description">Transaction Description</label>
                 <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter the Transaction Description" name="transaction"></textarea>
             </div>
             <div class="form-group">
-                <label for="price">Cost of Expense</label>
+                <label for="cost">Cost of Expense</label>
                 <input type="text" name="cost">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <div class="form-group">
+                <label>Tags :</label>
+                <input type="text" data-role="tagsinput" name="tags" class="form-control ">
+            </div>
+            <button type=" submit " class="btn btn-default ">Submit</button>
     </form>
 </div>
+
+<script>
+    formValidation = () => {
+        let x = document.forms["myForm"]["cost"].value;
+        if (isNaN(x) || x == "") {
+            alert("The Cost of expense must be a number ")
+            return false;
+        }
+    }
+</script>

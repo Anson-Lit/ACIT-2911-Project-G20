@@ -60,7 +60,7 @@ app.get("/logout", authController.logout)
 
 const server = app.listen(3003, function() {
     console.log(
-        "Server running. Visit: localhost:3003/expenses "
+        "Server running. Visit: localhost:3003/"
     );
 });
 

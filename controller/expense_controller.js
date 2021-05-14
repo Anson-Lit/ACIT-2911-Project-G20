@@ -12,8 +12,7 @@ let expenseController = {
             })
             res.render("expense/index", { expenses: expenses });
         } catch (err) {
-            console.log(err)
-            return res.status(400).json(err)
+            return res.status(500).json({ error: "An Error Occured" })
         }
         // res.render("expense/index", { expenses: req.user.expenses });
     },
@@ -42,17 +41,21 @@ let expenseController = {
     },
 
     create: async(req, res) => {
-        let theUser = await (req.user)
-        console.log(theUser.id)
-        const expense = await prisma.expenses.create({
-            data: {
-                userId: theUser.id,
-                date: req.body.datetime,
-                transaction: req.body.transaction,
-                cost: req.body.cost
-            }
-        })
-        res.redirect("/expenses");
+        try {
+            let theUser = await (req.user)
+            const expense = await prisma.expenses.create({
+                data: {
+                    userId: theUser.id,
+                    date: req.body.datetime,
+                    transaction: req.body.transaction,
+                    cost: req.body.cost,
+                    tags: req.body.tags
+                }
+            })
+            res.redirect("/expenses");
+        } catch (err) {
+            return res.status(500).json({ error: "An error occured" })
+        }
         // let id_list = [];
         // for (item of req.user.expenses) {
         //     id_list.push(item.id)
@@ -88,20 +91,11 @@ let expenseController = {
         // res.render("expense/edit", { expenseItem: searchResult });
     },
     delete: async(req, res) => {
-
-        console.log(req.params.id)
         const deleteExpense = await prisma.expenses.delete({
             where: { id: req.params.id }
         })
         res.redirect("/expenses")
-            // let theUser = await (req.user)
-            // let userId = theUser.id
-            // let expenses = await prisma.expenses.findMany({
-            //     where: { userId: userId }
-            // })
-            // const deleteExpense = await prisma.expense.delete({
-            //     where:{id: }
-            // })
+
 
         // let findId = req.params.id
         // let indexNum = req.user.expenses.findIndex(i => i.id == findId)
@@ -110,7 +104,7 @@ let expenseController = {
     },
 
     update: async(req, res) => {
-        let { datetime, transaction, cost } = req.body;
+        let { datetime, transaction, cost, tags } = req.body;
         const updateExpense = await prisma.expenses.update({
             where: {
                 id: req.params.id,
@@ -118,7 +112,8 @@ let expenseController = {
             data: {
                 date: datetime,
                 transaction: transaction,
-                cost: cost
+                cost: cost,
+                tags: tags
             },
         })
         res.redirect("/expenses");
@@ -133,8 +128,7 @@ let expenseController = {
         //     }
         // }
         // res.redirect("/expenses");
-    }
-
+    },
 };
 
 module.exports = expenseController;

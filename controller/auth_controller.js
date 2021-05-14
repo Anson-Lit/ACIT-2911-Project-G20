@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 let authController = {
     login: (req, res) => {
         res.status(200);
-        res.render("auth/login", { loggedIn: false });
+        res.render("/", { loggedIn: false });
     },
 
     register: (req, res) => {
@@ -28,7 +28,6 @@ let authController = {
             const user = await prisma.user.create({
                 data: { email, password }
             });
-            console.log(user)
             res.render("auth/login")
         } catch (err) {
             //Errors out if the email entered is the same as one in the database.
