@@ -17,7 +17,6 @@
                                         <div class="chip">
                                             <%= tags %>
                                         </div>
-
                                         <% } %>
                                             <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
@@ -27,12 +26,12 @@
 
 <script>
     let filterexpenses = () => {
-        let checker = document.querySelectorAll(".chip")
+        let checker = document.querySelectorAll("li")
         for (items of checker) {
             if (!items.innerHTML.toLowerCase().includes(myfilter.value.toLowerCase())) {
-                items.parentElement.style.display = "none";
+                items.style.display = "none";
             } else {
-                items.parentElement.style.display = "initial"
+                items.style.display = "initial"
             }
         }
     }
