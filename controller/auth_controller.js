@@ -4,10 +4,10 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 let authController = {
-    login: (req, res) => {
-        res.status(200);
-        res.render("/", { loggedIn: false });
-    },
+    // login: (req, res) => {
+    //     res.status(200);
+    //     res.render("/", { loggedIn: false });
+    // },
 
     register: (req, res) => {
         res.status(200);
@@ -17,7 +17,7 @@ let authController = {
     loginSubmit: (req, res, next) => {
         passport.authenticate("local", {
             successRedirect: "/expenses",
-            failureRedirect: "/login",
+            failureRedirect: "/index.html",
         })(req, res, next);
     },
     registerSubmit: async(req, res) => {
@@ -28,7 +28,7 @@ let authController = {
             const user = await prisma.user.create({
                 data: { email, password }
             });
-            res.render("auth/login")
+            res.redirect("/index.html")
         } catch (err) {
             //Errors out if the email entered is the same as one in the database.
             res.render("auth/register")
