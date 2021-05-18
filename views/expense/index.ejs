@@ -7,6 +7,8 @@
     </form>
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
+            <% const total = parseInt(0) %> 
+            <% total + parseInt(expenseItem.cost) %>
             <li class="list-group-item">
                 <strong><%= expenseItem.date %> </strong>
                 <%= expenseItem.transaction %>
@@ -26,6 +28,13 @@
             </li>
             <% }) %>
     </ul>
+    <div> TOTAL:
+        <% let total = 0 %>
+        <% expenses.forEach(function (expenseItem){ %>
+            <% total = total + parseInt(expenseItem.cost) %>
+        <% } )  %>
+        <%= total %>
+    </div>
 </div>
 
 <script>
