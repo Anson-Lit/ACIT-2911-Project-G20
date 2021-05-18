@@ -1,6 +1,10 @@
 <div class="container">
     <h1 class="page-header">Expenses</h1>
     <input class="form-control  my-2" id="filter" type="text" placeholder="Filter Expenses" />
+    <form name="budget" onsubmit="return formValidation()" action="/budget" method="POST">
+        <input name="amount" class="form-group" placeholder ="Enter a budget"/>
+        <button type="submit">Submit</button>
+    </form>
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
             <li class="list-group-item">
@@ -37,4 +41,13 @@
     }
     let myfilter = document.getElementById("filter")
     myfilter.addEventListener("input", filterexpenses)
+
+
+    formValidation = () => {
+        let x = document.forms["budget"]["amount"].value;
+        if (isNaN(x) || x == "") {
+            alert("The budget must be a number ")
+            return false;
+        }
+    }
 </script>
