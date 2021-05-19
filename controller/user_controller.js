@@ -35,20 +35,20 @@ function isUserValid(user, password) {
     return user.password === password;
 }
 
-const updateBudget = async (req,res) => {
+const updateBudget = async(req, res) => {
     const budget = req.body
-    console.log(budget)
-    console.log(req.session)
+        // console.log(budget)
+        // console.log(req.session)
 
     const user = await prisma.user.update({
-        where: {
-            id: req.session.passport.user,
-        },
-        data: {
-            budget: parseInt(budget.amount)
-        },
-    })
-    console.log(user)
+            where: {
+                id: req.session.passport.user,
+            },
+            data: {
+                budget: parseInt(budget.amount)
+            },
+        })
+        // console.log(user)
     res.redirect("/expenses");
 }
 

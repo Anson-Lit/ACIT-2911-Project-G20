@@ -9,15 +9,15 @@ let expenseController = {
             let theUser = await (req.user)
             let userId = theUser.id
             let expenses = await prisma.expenses.findMany({
-                where: { userId: userId }
-            })
-            console.log(req.session)
+                    where: { userId: userId }
+                })
+                // console.log(req.session)
             let user = await user_controller.getUserById(req.session.passport.user)
-            console.log('USER IS', user)
+                // console.log('USER IS', user)
             let budget = user.budget
 
-            
-            res.render("expense/index", { expenses: expenses, budget: budget});
+
+            res.render("expense/index", { expenses: expenses, budget: budget });
         } catch (err) {
             return res.status(500).json({ error: "An Error Occured" })
         }
