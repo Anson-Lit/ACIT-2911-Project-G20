@@ -18,6 +18,8 @@ model User {
   Expenses  Expenses[]
   createdAt DateTime @default(now()) @map("Created_at")
   UpdatedAt DateTime @updatedAt @map("updated_at")
+  budget    Int
+
   @@map(name: "users")
 }
 
