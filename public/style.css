@@ -11,6 +11,14 @@ body {
     background-color: #eca1a6;
 }
 
+.total {
+    display: inline-block;
+    background-color: #eca1a6;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
 h1 {
     background-color: #eca1a6;
     text-align: center;

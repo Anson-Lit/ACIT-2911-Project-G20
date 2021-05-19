@@ -3,7 +3,7 @@
     <input class="form-control  my-2" id="filter" type="text" placeholder="Filter Expenses" />
     <form name="budget" onsubmit="return formValidation()" action="/budget" method="POST">
         <input name="amount" class="form-group" placeholder ="Enter a budget"/>
-        <button type="submit">Submit</button>
+        <button class="btn" type="submit">Submit</button>
     </form>
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
@@ -28,7 +28,7 @@
             </li>
             <% }) %>
     </ul>
-    <div> TOTAL:
+    <div class="total"> TOTAL:
         <% let total = 0 %>
         <% expenses.forEach(function (expenseItem){ %>
             <% total = total + parseInt(expenseItem.cost) %>
