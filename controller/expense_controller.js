@@ -1,6 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 let database = require("../database").database;
+const user_controller = require('./user_controller')
 
 let expenseController = {
     list: async(req, res) => {
@@ -10,7 +11,13 @@ let expenseController = {
             let expenses = await prisma.expenses.findMany({
                 where: { userId: userId }
             })
-            res.render("expense/index", { expenses: expenses });
+            console.log(req.session)
+            let user = await user_controller.getUserById(req.session.passport.user)
+            console.log('USER IS', user)
+            let budget = user.budget
+
+            
+            res.render("expense/index", { expenses: expenses, budget: budget});
         } catch (err) {
             return res.status(500).json({ error: "An Error Occured" })
         }

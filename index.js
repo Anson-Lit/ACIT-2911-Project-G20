@@ -58,6 +58,9 @@ app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
 app.get("/logout", authController.logout)
 
+//app.get('/budget', ensureAuthenticated, expenseController.list);
+app.post("/budget", userController.updateBudget);
+
 const server = app.listen(3003, function() {
     console.log(
         "Server running. Visit: localhost:3003/"

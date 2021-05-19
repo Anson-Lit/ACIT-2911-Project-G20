@@ -28,13 +28,24 @@
             </li>
             <% }) %>
     </ul>
-    <div class="total"> TOTAL:
+    <div class="total" id ='total'> TOTAL:
         <% let total = 0 %>
         <% expenses.forEach(function (expenseItem){ %>
             <% total = total + parseInt(expenseItem.cost) %>
         <% } )  %>
         <%= total %>
     </div>
+    <div class = 'total' id='budget'>
+         YOUR BUDGET: 
+         <%= budget %>
+    </div>
+    <div id='compare'>
+        <% if(total > budget ) { string = 'You are OVER your budget!'} %>
+        <% if(total < budget ) {string = 'You are still under your budget'} %>
+        <% if(total == budget) {string ='You are at your budget'} %>
+        <%= string %>
+    </div>
+
 </div>
 
 <script>
@@ -59,4 +70,19 @@
             return false;
         }
     }
+
+
+    let compare = (total,budget) => {
+        if (total == budget){
+            let string = 'You are right at your budget'
+        }
+        else if(total< budget){
+            let string = 'You are still under your budget'
+        }
+        else if(total > budget){
+            let string = 'You are over your budget!'
+        }
+        document.getElementById('compare'.innerHTML) = string
+    }
+    document.getElementById('compare').innerHTML = compare(total,budget);
 </script>
