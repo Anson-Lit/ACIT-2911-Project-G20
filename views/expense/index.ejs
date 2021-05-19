@@ -28,19 +28,20 @@
             </li>
             <% }) %>
     </ul>
-    <div class="total" id ='total'> TOTAL:
-        <% let total = 0 %>
+    <div class="total" > TOTAL:
+        <!-- <% let total = 0 %>
         <% expenses.forEach(function (expenseItem){ %>
             <% total = total + parseInt(expenseItem.cost) %>
-        <% } )  %>
-        <%= total %>
+        <% } )  %> -->
+        <span id='total'><%= total %> </span>
     </div>
-    <div class = 'total' id='budget'>
+    <div class = 'total'>
          YOUR BUDGET: 
-         <%= budget %>
+         <span id='budget'><%= budget %></span>
     </div>
-    <div id='compare'>
-        <% if(total > budget ) { string = 'You are OVER your budget!'} %>
+    <div>
+        <% if(total > budget ) { string = 'You are OVER your budget!'%>
+        <% } %>
         <% if(total < budget ) {string = 'You are still under your budget'} %>
         <% if(total == budget) {string ='You are at your budget'} %>
         <%= string %>
@@ -70,19 +71,26 @@
             return false;
         }
     }
-
-
-    let compare = (total,budget) => {
-        if (total == budget){
-            let string = 'You are right at your budget'
-        }
-        else if(total< budget){
-            let string = 'You are still under your budget'
-        }
-        else if(total > budget){
-            let string = 'You are over your budget!'
-        }
-        document.getElementById('compare'.innerHTML) = string
+    warning = () =>{
+        alert('WARNING: You are currently OVER your established budget!')
     }
-    document.getElementById('compare').innerHTML = compare(total,budget);
+
+    if(parseInt(total.innerText)>parseInt(budget.innerText)){ 
+        warning();
+    }
+
+    
+
+    // let compare = (total,budget) => {
+    //     if (total == budget){
+    //         let string = 'You are right at your budget'
+    //     }
+    //     else if(total< budget){
+    //         let string = 'You are still under your budget'
+    //     }
+    //     else if(total > budget){
+    //         let string = 'You are over your budget!'
+    //     }
+    //     document.getElementById('compare'.innerHTML) = string
+    // }
 </script>

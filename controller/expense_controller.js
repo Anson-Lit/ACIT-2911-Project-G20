@@ -15,10 +15,11 @@ let expenseController = {
             let user = await user_controller.getUserById(req.session.passport.user)
                 // console.log('USER IS', user)
             let budget = user.budget
-
-
-            res.render("expense/index", { expenses: expenses, budget: budget });
+            let total = await getTotal(expenses)
+                
+            res.render("expense/index", { expenses: expenses, budget: budget, total: total});
         } catch (err) {
+            console.log(err)
             return res.status(500).json({ error: "An Error Occured" })
         }
         // res.render("expense/index", { expenses: req.user.expenses });
@@ -136,6 +137,15 @@ let expenseController = {
         // }
         // res.redirect("/expenses");
     },
+
 };
+
+const getTotal = (expenses) =>{
+    let total = 0
+    expenses.forEach((expense)=>{
+        total = total + parseInt(expense.cost)
+    })
+    return total
+}
 
 module.exports = expenseController;
