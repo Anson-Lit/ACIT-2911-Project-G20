@@ -6,12 +6,20 @@ const server = require('./index');
 beforeAll((done) => {
     done();
 })
-
+afterEach(async(done) => {
+    server.close();
+    done();
+})
 afterAll(async(done) => {
     // await prisma.user.deleteMany();
     // await prisma.$disconnect();
     // await prisma.expenses.deleteMany();
     // await prisma.$disconnect();
+    server.close();
+    done();
+})
+
+afterEach(async(done) => {
     server.close();
     done();
 })
@@ -75,22 +83,22 @@ const exp1 = {
 // })
 
 
-it('calls res.render expense/index, displaying expenses', async () => {
+it('calls res.render expense/index, displaying expenses', async() => {
     await expense_controller.list(req3, res)
     expect(res.render).toHaveBeenCalled()
 })
 
-it('calls res.render expense/create path', async () => {
+it('calls res.render expense/create path', async() => {
     await expense_controller.new(req3, res)
     expect(res.render).toHaveBeenCalled()
 })
 
-it('calls res.render expense/single-expense path using valid id', async () => {
+it('calls res.render expense/single-expense path using valid id', async() => {
     await expense_controller.listOne(req, res)
     expect(res.render).toHaveBeenCalled()
 })
 
-it('calls res.render expense/index, displaying expenses, id:100 doesn\'t exist', async () => {
+it('calls res.render expense/index, displaying expenses, id:100 doesn\'t exist', async() => {
     await expense_controller.listOne(req2, res)
     expect(res.render).toHaveBeenCalled()
 })

@@ -7,7 +7,10 @@ const app = require('./index');
 beforeAll((done) => {
     done();
 });
-
+afterEach(async(done) => {
+    app.close();
+    done();
+})
 
 afterAll(async(done) => {
     // await prisma.user.deleteMany();
@@ -15,7 +18,6 @@ afterAll(async(done) => {
     app.close();
     done();
 })
-
 
 const req = {
     params: {
@@ -80,13 +82,13 @@ it('renders the login page when login unsuccessful', () => {
     expect(200)
 })
 
-it('does not register a new user if the email already exists', () => {
-    // const response = await request(app)
-    //     .post('/register')
-    //     .send(user1)
-    auth_controller.registerSubmit(user1, res, next)
-    expect(200)
-})
+// it('does not register a new user if the email already exists', () => {
+//     // const response = await request(app)
+//     //     .post('/register')
+//     //     .send(user1)
+//     auth_controller.registerSubmit(user1, res, next)
+//     expect(200)
+// })
 
 it('registers a new user into the DB, then redirects to login page', () => {
     auth_controller.registerSubmit(req3, res, next)
