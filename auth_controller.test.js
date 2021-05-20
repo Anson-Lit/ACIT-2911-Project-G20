@@ -56,11 +56,6 @@ const req3 = {
 }
 
 
-it('renders login page when not signed in', () => {
-    auth_controller.login(req, res)
-    expect(res.render).toHaveBeenCalledWith('/', { loggedIn: false })
-})
-
 it('renders register page when not signed in', () => {
     auth_controller.register(req, res)
     expect(res.render).toHaveBeenCalledWith('auth/register', { loggedIn: false })
