@@ -65,7 +65,7 @@ it('should redirect to login page again, when nonexistent user', async() => {
         .post('/login')
         .send(user2)
         .expect('Content-Type', 'text/plain; charset=utf-8')
-        .expect('Location', '/login')
+        .expect('Location', '/index.html')
     expect(response.redirect).toBeTruthy()
 
 
