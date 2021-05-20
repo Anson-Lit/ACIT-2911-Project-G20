@@ -1,8 +1,14 @@
 <div class="container">
     <h1 class="page-header">Expenses</h1>
     <input class="form-control  my-2" id="filter" type="text" placeholder="Filter Expenses" />
+    <form name="budget" onsubmit="return formValidation()" action="/budget" method="POST">
+        <input name="amount" class="form-group" placeholder ="Enter a budget"/>
+        <button class="btn" type="submit">Submit</button>
+    </form>
     <ul class="list-group">
         <% expenses.forEach(function (expenseItem) { %>
+            <% const total = parseInt(0) %> 
+            <% total + parseInt(expenseItem.cost) %>
             <li class="list-group-item">
                 <strong><%= expenseItem.date %> </strong>
                 <%= expenseItem.transaction %>
@@ -17,25 +23,74 @@
                                         <div class="chip">
                                             <%= tags %>
                                         </div>
-
                                         <% } %>
                                             <a class="pull-right" href=<%="/expense/" + expenseItem.id %>>View</a>
             </li>
             <% }) %>
     </ul>
+    <div class="total" > TOTAL:
+        <!-- <% let total = 0 %>
+        <% expenses.forEach(function (expenseItem){ %>
+            <% total = total + parseInt(expenseItem.cost) %>
+        <% } )  %> -->
+        <span id='total'><%= total %> </span>
+    </div>
+    <div class = 'total'>
+         YOUR BUDGET: 
+         <span id='budget'><%= budget %></span>
+    </div>
+    <div>
+        <% if(total > budget ) { string = 'You are OVER your budget!'%>
+        <% } %>
+        <% if(total < budget ) {string = 'You are still under your budget'} %>
+        <% if(total == budget) {string ='You are at your budget'} %>
+        <%= string %>
+    </div>
+
 </div>
 
 <script>
     let filterexpenses = () => {
-        let checker = document.querySelectorAll(".chip")
+        let checker = document.querySelectorAll("li")
         for (items of checker) {
             if (!items.innerHTML.toLowerCase().includes(myfilter.value.toLowerCase())) {
-                items.parentElement.style.display = "none";
+                items.style.display = "none";
             } else {
-                items.parentElement.style.display = "initial"
+                items.style.display = "initial"
             }
         }
     }
     let myfilter = document.getElementById("filter")
     myfilter.addEventListener("input", filterexpenses)
+
+
+    formValidation = () => {
+        let x = document.forms["budget"]["amount"].value;
+        if (isNaN(x) || x == "") {
+            alert("The budget must be a number ")
+            return false;
+        }
+    }
+    warning = () =>{
+        alert('WARNING: You are currently OVER your established budget!')
+    }
+
+    if(parseInt(total.innerText)>parseInt(budget.innerText)){ 
+        warning();
+    }
+
+    
+
+    // let compare = (total,budget) => {
+    //     if (total == budget){
+    //         let string = 'You are right at your budget'
+    //     }
+    //     else if(total< budget){
+    //         let string = 'You are still under your budget'
+    //     }
+    //     else if(total > budget){
+    //         let string = 'You are over your budget!'
+    //     }
+    //     document.getElementById('compare'.innerHTML) = string
+    // }
 </script>

@@ -53,10 +53,13 @@ app.post("/expense/delete/:id", ensureAuthenticated, expenseController.delete);
 app.post("/expense/update/:id", ensureAuthenticated, expenseController.update);
 
 app.get("/register", forwardAuthenticated, authController.register);
-app.get("/login", forwardAuthenticated, authController.login);
+// app.get("/login", forwardAuthenticated, authController.login);
 app.post("/register", authController.registerSubmit);
 app.post("/login", authController.loginSubmit);
 app.get("/logout", authController.logout)
+
+//app.get('/budget', ensureAuthenticated, expenseController.list);
+app.post("/budget", userController.updateBudget);
 
 const server = app.listen(3003, function() {
     console.log(
