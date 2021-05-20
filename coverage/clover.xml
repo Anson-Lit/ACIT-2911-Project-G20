@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1621476830388" clover="3.2.0">
-  <project timestamp="1621476830389" name="All files">
+<coverage generated="1621477833695" clover="3.2.0">
+  <project timestamp="1621477833695" name="All files">
     <metrics statements="139" coveredstatements="95" conditionals="20" coveredconditionals="2" methods="26" coveredmethods="14" elements="185" coveredelements="111" complexity="0" loc="139" ncloc="139" packages="3" files="7" classes="7"/>
     <package name="ACIT-2911-Project-G20">
       <metrics statements="47" coveredstatements="37" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="1"/>
