@@ -25,22 +25,22 @@ afterAll(async(done) => {
     done();
 })
 
-it('returns a user with valid credentials', () => {
-    let test_user = user_controller.getUserByEmailIdAndPassword(user1.email, user1.password)
+it('returns a user with valid credentials', async() => {
+    let test_user = await user_controller.getUserByEmailIdAndPassword(user1.email, user1.password)
     expect(test_user).toBeDefined()
 })
 
-it('returns null if theres no user found', () => {
-    let test_user = user_controller.getUserByEmailIdAndPassword(user2.email, user2.password)
-    expect(test_user).toStrictEqual(Promise.resolve())
+it('returns null if theres no user found', async() => {
+    let test_user = await user_controller.getUserByEmailIdAndPassword(user2.email, user2.password)
+    expect(test_user).toStrictEqual(null)
 })
 
-it('returns a user with valid id', () => {
-    let test_user = user_controller.getUserById(user1.id)
+it('returns a user with valid id', async() => {
+    let test_user = await user_controller.getUserById(user1.id)
     expect(test_user).toBeDefined()
 })
 
-it('returns null when given an invalid id', () => {
-    let test_user = user_controller.getUserById('6')
-    expect(test_user).toStrictEqual(Promise.resolve())
+it('returns null when given an invalid id', async() => {
+    let test_user = await user_controller.getUserById('6')
+    expect(test_user).toStrictEqual(null)
 })

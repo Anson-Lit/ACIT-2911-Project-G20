@@ -109,10 +109,10 @@ it('calls res.render expense/index, displaying expenses, id:100 doesn\'t exist',
 //     expense_controller.create(req, res)
 // })
 
-// it('calls res.redirect to /expenses after editting', () => {
-//     expense_controller.edit(req, res)
-//     expect(res.render).toHaveBeenCalled()
-// })
+it('calls res.redirect to /expenses after editting', async() => {
+    await expense_controller.edit(req, res)
+    expect(res.render).toHaveBeenCalled()
+})
 
 // it('calls res.redirect after deleting', () => {
 //     expense_controller.delete(req, res)
