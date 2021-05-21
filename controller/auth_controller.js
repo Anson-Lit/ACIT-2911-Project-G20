@@ -48,7 +48,7 @@ let authController = {
     logout: (req, res) => {
         req.logout();
         res.status(200);
-        res.redirect("/login")
+        res.redirect("/index.html")
     }
 };
 

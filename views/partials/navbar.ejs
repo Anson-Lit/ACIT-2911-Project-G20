@@ -6,7 +6,10 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <!-- <a class="nav-item nav-link" href="/expenses">Expenses</a> -->
-            <a class="nav-item nav-link" href="/expense/new">Enter a new expense</a>
+            <% if (typeof loggedIn == 'undefined') { %>
+                <a class="nav-item nav-link" href="/expense/new">Enter a new expense</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+                <% } %>
         </div>
     </div>
 </nav>
