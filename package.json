@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "test": "jest --runInBand --detectOpenHandles",
+        "test": "jest --runInBand --detectOpenHandles, --forceExit ",
         "start": "nodemon",
         "migrate": "npx prisma migrate dev",
         "studio": "npx prisma studio"
