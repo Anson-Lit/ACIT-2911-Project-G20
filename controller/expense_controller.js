@@ -1,7 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-let database = require("../database").database;
-const user_controller = require('./user_controller')
 
 let expenseController = {
     list: async(req, res) => {
@@ -9,21 +7,19 @@ let expenseController = {
             let theUser = await (req.user)
             let userId = theUser.id
             let expenses = await prisma.expenses.findMany({
-                    where: { userId: userId }
-                })
-                // console.log(req.session)
-            let user = await user_controller.getUserById(req.session.passport.user)
-                // console.log('USER IS', user)
-            let budget = user.budget
-            let total = await getTotal(expenses)
-                
-            res.render("expense/index", { expenses: expenses, budget: budget, total: total});
+                where: { userId: userId }
+            })
+
+            let budget = theUser.budget
+            let total = getTotal(expenses)
+
+            res.render("expense/index", { expenses: expenses, budget: budget, total: total });
         } catch (err) {
-            console.log(err)
+
             return res.status(500).json({ error: "An Error Occured" })
         }
-        // res.render("expense/index", { expenses: req.user.expenses });
     },
+
 
     new: (req, res) => {
         res.render("expense/create");
@@ -61,6 +57,7 @@ let expenseController = {
                 }
             })
             res.redirect("/expenses");
+
         } catch (err) {
             return res.status(500).json({ error: "An error occured" })
         }
@@ -140,9 +137,9 @@ let expenseController = {
 
 };
 
-const getTotal = (expenses) =>{
+const getTotal = (expenses) => {
     let total = 0
-    expenses.forEach((expense)=>{
+    expenses.forEach((expense) => {
         total = total + parseInt(expense.cost)
     })
     return total
