@@ -52,7 +52,7 @@ const returnVal = {
         date: '1',
         transaction: 'apple',
         cost: "40",
-        tags: "Food",
+        tags: "Foods",
         userId: "082cbf6d-b6cd-40dd-bade-891d89ce8611"
     }
 }
