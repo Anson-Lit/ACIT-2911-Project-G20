@@ -33,11 +33,11 @@
         <% expenses.forEach(function (expenseItem){ %>
             <% total = total + parseInt(expenseItem.cost) %>
         <% } )  %> -->
-        <span id='total'><%= total %> </span>
+        <span id='total'><%= '$' + total %> </span>
     </div>
     <div class = 'total'>
          YOUR BUDGET: 
-         <span id='budget'><%= budget %></span>
+         <span id='budget'><%= '$' + budget %></span>
     </div>
     <div>
         <% if(total > budget ) { string = 'You are OVER your budget!'%>
