@@ -5,22 +5,21 @@ let expenseController = {
     list: async(req, res) => {
         try {
             let theUser = await (req.user)
-            console.log(theUser)
             let userId = theUser.id
             let expenses = await prisma.expenses.findMany({
-                    where: { userId: userId }
-                })
+                where: { userId: userId }
+            })
 
             let budget = theUser.budget
             let total = getTotal(expenses)
-                
-            res.render("expense/index", { expenses: expenses, budget: budget, total: total});
+
+            res.render("expense/index", { expenses: expenses, budget: budget, total: total });
         } catch (err) {
 
             return res.status(500).json({ error: "An Error Occured" })
         }
     },
-    
+
 
     new: (req, res) => {
         res.render("expense/create");
@@ -58,6 +57,7 @@ let expenseController = {
                 }
             })
             res.redirect("/expenses");
+
         } catch (err) {
             return res.status(500).json({ error: "An error occured" })
         }
@@ -137,9 +137,9 @@ let expenseController = {
 
 };
 
-const getTotal = (expenses) =>{
+const getTotal = (expenses) => {
     let total = 0
-    expenses.forEach((expense)=>{
+    expenses.forEach((expense) => {
         total = total + parseInt(expense.cost)
     })
     return total
