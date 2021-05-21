@@ -24,9 +24,10 @@ let authController = {
         //Using Sqlite
 
         const { email, password } = req.body
+        const budget = 0 
         try {
             const user = await prisma.user.create({
-                data: { email, password }
+                data: { email, password, budget }
             });
             res.redirect("/index.html")
         } catch (err) {
