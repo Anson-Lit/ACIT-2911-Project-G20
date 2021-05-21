@@ -1,4 +1,6 @@
 const expense_controller = require('./controller/expense_controller')
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const request = require('supertest');
 const server = require('./index');
 
@@ -24,17 +26,36 @@ afterEach(async(done) => {
     done();
 })
 
+
+jest.mock('request', () => ({
+    post: jest.fn(),
+}));
+
 const req = {
+    user: { id: '082cbf6d-b6cd-40dd-bade-891d89ce8611' },
     params: {
-        id: '12065a5e-8910-48eb-acd9-4e52ba380b31',
+        id: '082cbf6d-b6cd-40dd-bade-891d89ce8611',
     },
     body: {
+        id: "509fd75e-246e-4473-a04a-6d046e54217f",
         datetime: '1',
-        transaction: 'test',
+        transaction: 'apple',
         cost: "40",
-        email: 'email@email.com'
+        tags: "Food",
+        userId: "082cbf6d-b6cd-40dd-bade-891d89ce8611"
     }
 };
+
+const returnVal = {
+    body: {
+        id: "509fd75e-246e-4473-a04a-6d046e54217f",
+        date: '1',
+        transaction: 'apple',
+        cost: "40",
+        tags: "Food",
+        userId: "082cbf6d-b6cd-40dd-bade-891d89ce8611"
+    }
+}
 const req2 = {
     params: { id: '100' }
 }
@@ -62,6 +83,15 @@ const req3 = {
     },
 }
 
+const req4 = {
+    user: user1,
+    session: {
+        user: '082cbf6d-b6cd-40dd-bade-891d89ce8611'
+    },
+    req
+}
+
+
 const exp1 = {
     userId: "6bce5853-8947-43f1-b365-665d2db8fcce",
     datetime: "2021-05-01",
@@ -71,16 +101,18 @@ const exp1 = {
 
 }
 
-// it("Creates an expense", async() => {
-//     const expectedResponse = exp1
-//     const response = await request(server)
-//         .post("/expense/")
-//         .send(exp1)
-//         .expect(302)
-//     //const show = await request(server)
-//         .get("/expenses")
-//         .expect(302)
-// })
+
+it('creates an expense', async() => {
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn(), redirect: jest.fn().mockReturnThis() };
+    await expense_controller.create(req, res);
+    expect(await prisma.expenses.findUnique({
+        where: {
+            id: req.body.id
+        },
+    })).toEqual(
+        returnVal.body,
+    );
+});
 
 
 it('calls res.render expense/index, displaying expenses', async() => {
@@ -103,21 +135,7 @@ it('calls res.render expense/index, displaying expenses, id:100 doesn\'t exist',
     expect(res.render).toHaveBeenCalled()
 })
 
-
-
-// it('calls res.redirect to /expenses after creating', () => {
-//     expense_controller.create(req, res)
-// })
-
 it('calls res.redirect to /expenses after editting', async() => {
     await expense_controller.edit(req, res)
     expect(res.render).toHaveBeenCalled()
 })
-
-// it('calls res.redirect after deleting', () => {
-//     expense_controller.delete(req, res)
-// })
-
-// it('calls res.redirect to /expenses after updating', () => {
-//     expense_controller.update(req, res)
-// })
