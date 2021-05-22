@@ -50,7 +50,7 @@ const user1 = {
 
 const user2 = {
     email: 'user2@email.com',
-    password: '2',
+    password: '3',
 }
 
 
